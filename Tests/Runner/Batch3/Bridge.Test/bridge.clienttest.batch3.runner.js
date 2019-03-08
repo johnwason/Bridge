@@ -114,8 +114,9 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#3811 - TestLongMinValue", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3811.TestLongMinValue);
             QUnit.test("#3820 - TestRefReturn", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3820.TestRefReturn);
             QUnit.test("#3823 - TestIsPattern", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3823.TestIsPattern);
-            QUnit.test("#3828 - TestSortedList", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3828.TestSortedList);
+            QUnit.test("#3827, #3828 - TestSortedList", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3828.TestSortedList);
             QUnit.test("#3830 - TestArrayResize", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3830.TestArrayResize);
+            QUnit.test("#3830 - TestArrayCreateInstanceResize", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3830.TestArrayCreateInstanceResize);
             QUnit.test("#3833 - TestTupleEquals", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3833.TestTupleEquals);
             QUnit.test("#3836 - TestAsyncLambda", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3836.TestAsyncLambda);
             QUnit.test("#3865 - TestArrayAssembly", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3865.TestArrayAssembly);
@@ -11234,7 +11235,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestIsPrimitive: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2522).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2522, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIsPrimitive()", $t.Line = "12", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2522).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2522, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIsPrimitive()", $t.Line = "17", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2522.TestIsPrimitive();
                 }
             }
@@ -17934,7 +17935,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestEnumToObject: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3720).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3720, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestEnumToObject()", $t.Line = "18", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3720).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3720, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestEnumToObject()", $t.Line = "19", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3720.TestEnumToObject();
                 }
             }
@@ -18506,7 +18507,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestIsAssignableFrom: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3809).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3809, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIsAssignableFrom()", $t.Line = "11", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3809).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3809, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIsAssignableFrom()", $t.Line = "19", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3809.TestIsAssignableFrom();
                 }
             }
@@ -18558,7 +18559,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestLongMinValue: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3811).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3811, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLongMinValue()", $t.Line = "18", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3811).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3811, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLongMinValue()", $t.Line = "24", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3811.TestLongMinValue();
                 }
             }
@@ -18584,7 +18585,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestRefReturn: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3820).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3820, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestRefReturn()", $t.Line = "38", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3820).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3820, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestRefReturn()", $t.Line = "42", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3820.TestRefReturn();
                 }
             }
@@ -18636,7 +18637,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestSortedList: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3828).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3828, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestSortedList()", $t.Line = "11", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3828).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3828, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestSortedList()", $t.Line = "30", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3828.TestSortedList();
                 }
             }
@@ -18662,8 +18663,13 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestArrayResize: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3830).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3830, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestArrayResize()", $t.Line = "10", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3830).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3830, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestArrayResize()", $t.Line = "9", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3830.TestArrayResize();
+                },
+                TestArrayCreateInstanceResize: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3830).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3830, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestArrayCreateInstanceResize()", $t.Line = "48", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge3830.TestArrayCreateInstanceResize();
                 }
             }
         },
@@ -18714,7 +18720,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestAsyncLambda: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3836).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3836, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncLambda()", $t.Line = "28", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3836).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3836, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncLambda()", $t.Line = "25", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3836.TestAsyncLambda();
                 }
             }
@@ -18740,7 +18746,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestArrayAssembly: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3865).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3865, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestArrayAssembly()", $t.Line = "11", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3865).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3865, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestArrayAssembly()", $t.Line = "12", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge3865.TestArrayAssembly();
                 }
             }
