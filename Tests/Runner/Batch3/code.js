@@ -7587,7 +7587,7 @@ Bridge.$N1391Result =                     r;
         methods: {
             TestPreformanceNowIsDouble: function () {
                 var p;
-                for (var i = 1; i < 10001; i = (i + 1) | 0) {
+                for (var i = 1; i < 1000; i = (i + 1) | 0) {
                     p = Bridge.global.performance.now();
                     if (!this.HasNoFraction(p)) {
                         Bridge.Test.NUnit.Assert.True(true, "Did " + i + " attempt(s) to check performance.now() returns float");
