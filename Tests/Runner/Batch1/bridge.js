@@ -10387,7 +10387,7 @@ Bridge.define("System.Type", {
                 d1.setDate(d1.getDate() + Math.floor(v));
                 d1.kind = (d.kind !== undefined) ? d.kind : 0;
 
-                return v % 1 !== 0 ? this.addMilliseconds(d1, Math.round((v % 1) * 864e5)) : d1;
+                return v % 1 !== 0 ? this.addMilliseconds(d1, Math.round((v % 1) * 864e5)) : this.create$2(this.getTicks(d1), d1.kind);
             },
 
             addHours: function (d, v) {

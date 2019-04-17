@@ -35728,6 +35728,19 @@ Bridge.$N1391Result =                     r;
         }
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3777", {
+        statics: {
+            methods: {
+                TestAddDays: function () {
+                    var d = System.DateTime.getNow();
+                    var d2 = System.DateTime.addDays(d, 3);
+
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, Bridge.compare(d, d2));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3785", {
         statics: {
             methods: {
