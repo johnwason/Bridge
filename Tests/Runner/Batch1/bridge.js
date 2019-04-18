@@ -7027,7 +7027,7 @@ Bridge.define("System.Type", {
                                     minDecimals = 0;
                                     maxDecimals = precision - (exponent > 0 ? exponent + 1 : 1);
 
-                                    return this.defaultFormat(number, 1, minDecimals, maxDecimals, nf, true);
+                                    return this.defaultFormat(number, 1, isDecimal ? Math.min(27, Math.max(minDecimals, number.$precision)) : minDecimals, maxDecimals, nf, true);
                                 }
 
                                 exponentPrefix = exponentPrefix === "G" ? "E" : "e";
@@ -7053,7 +7053,7 @@ Bridge.define("System.Type", {
                                 }
                             }
 
-                            return this.defaultFormat(coefficient, 1, minDecimals, maxDecimals, nf) + exponentPrefix + this.defaultFormat(exponent, exponentPrecision, 0, 0, nf, true);
+                            return this.defaultFormat(coefficient, 1, isDecimal ? Math.min(27, Math.max(minDecimals, number.$precision)) : minDecimals, maxDecimals, nf) + exponentPrefix + this.defaultFormat(exponent, exponentPrecision, 0, 0, nf, true);
                         case "P":
                             if (isNaN(precision)) {
                                 precision = nf.percentDecimalDigits;
@@ -8728,6 +8728,13 @@ Bridge.define("System.Type", {
             v = 0;
         }
 
+        if (Bridge.isNumber(provider)) {
+            this.$precision = provider;
+            provider = undefined;
+        } else {
+            this.$precision = 0;
+        }
+
         if (typeof v === "string") {
             provider = provider || System.Globalization.CultureInfo.getCurrentCulture();
 
@@ -8752,6 +8759,10 @@ Bridge.define("System.Type", {
                 p = 0;
             }
             v = v.toFixed(p);
+        }
+
+        if (v instanceof System.Decimal) {
+            this.$precision = v.$precision;
         }
 
         this.value = System.Decimal.getValue(v);
@@ -8826,15 +8837,17 @@ Bridge.define("System.Type", {
     };
 
     System.Decimal.prototype.dividedToIntegerBy = function (d) {
-        return new System.Decimal(this.value.dividedToIntegerBy(System.Decimal.getValue(d)));
+        var d = new System.Decimal(this.value.dividedToIntegerBy(System.Decimal.getValue(d)), this.$precision);
+        d.$precision = Math.max(d.value.decimalPlaces(), this.$precision);
+        return d;
     };
 
     System.Decimal.prototype.exponential = function () {
-        return new System.Decimal(this.value.exponential());
+        return new System.Decimal(this.value.exponential(), this.$precision);
     };
 
     System.Decimal.prototype.abs = function () {
-        return new System.Decimal(this.value.abs());
+        return new System.Decimal(this.value.abs(), this.$precision);
     };
 
     System.Decimal.prototype.floor = function () {
@@ -8874,11 +8887,15 @@ Bridge.define("System.Type", {
     };
 
     System.Decimal.prototype.add = function (another) {
-        return new System.Decimal(this.value.plus(System.Decimal.getValue(another)));
+        var d = new System.Decimal(this.value.plus(System.Decimal.getValue(another)));
+        d.$precision = Math.max(d.value.decimalPlaces(), Math.max(another.$precision || 0, this.$precision));
+        return d;
     };
 
     System.Decimal.prototype.sub = function (another) {
-        return new System.Decimal(this.value.minus(System.Decimal.getValue(another)));
+        var d = new System.Decimal(this.value.minus(System.Decimal.getValue(another)));
+        d.$precision = Math.max(d.value.decimalPlaces(), Math.max(another.$precision || 0, this.$precision));
+        return d;
     };
 
     System.Decimal.prototype.isZero = function () {
@@ -8886,27 +8903,33 @@ Bridge.define("System.Type", {
     };
 
     System.Decimal.prototype.mul = function (another) {
-        return new System.Decimal(this.value.times(System.Decimal.getValue(another)));
+        var d = new System.Decimal(this.value.times(System.Decimal.getValue(another)));
+        d.$precision = Math.max(d.value.decimalPlaces(), Math.max(another.$precision || 0, this.$precision));
+        return d;
     };
 
     System.Decimal.prototype.div = function (another) {
-        return new System.Decimal(this.value.dividedBy(System.Decimal.getValue(another)));
+        var d = new System.Decimal(this.value.dividedBy(System.Decimal.getValue(another)));
+        d.$precision = Math.max(d.value.decimalPlaces(), Math.max(another.$precision || 0, this.$precision));
+        return d;
     };
 
     System.Decimal.prototype.mod = function (another) {
-        return new System.Decimal(this.value.modulo(System.Decimal.getValue(another)));
+        var d = new System.Decimal(this.value.modulo(System.Decimal.getValue(another)));
+        d.$precision = Math.max(d.value.decimalPlaces(), Math.max(another.$precision || 0, this.$precision));
+        return d;
     };
 
     System.Decimal.prototype.neg = function () {
-        return new System.Decimal(this.value.negated());
+        return new System.Decimal(this.value.negated(), this.$precision);
     };
 
     System.Decimal.prototype.inc = function () {
-        return new System.Decimal(this.value.plus(System.Decimal.getValue(1)));
+        return new System.Decimal(this.value.plus(System.Decimal.getValue(1)), this.$precision);
     };
 
     System.Decimal.prototype.dec = function () {
-        return new System.Decimal(this.value.minus(System.Decimal.getValue(1)));
+        return new System.Decimal(this.value.minus(System.Decimal.getValue(1)), this.$precision);
     };
 
     System.Decimal.prototype.sign = function () {
@@ -8914,7 +8937,7 @@ Bridge.define("System.Type", {
     };
 
     System.Decimal.prototype.clone = function () {
-        return new System.Decimal(this);
+        return new System.Decimal(this, this.$precision);
     };
 
     System.Decimal.prototype.ne = function (v) {
@@ -9031,23 +9054,41 @@ Bridge.define("System.Type", {
     };
 
     System.Decimal.min = function () {
-        var values = [];
+        var values = [],
+            d, p;
 
         for (var i = 0, len = arguments.length; i < len; i++) {
             values.push(System.Decimal.getValue(arguments[i]));
         }
 
-        return new System.Decimal(Bridge.$Decimal.min.apply(Bridge.$Decimal, values));
+        d = Bridge.$Decimal.min.apply(Bridge.$Decimal, values);
+
+        for (var i = 0; i < arguments.length; i++) {
+            if (d.eq(values[i])) {
+                p = arguments[i].$precision;
+            }
+        }
+
+        return new System.Decimal(d, p);
     };
 
     System.Decimal.max = function () {
-        var values = [];
+        var values = [],
+            d, p;
 
         for (var i = 0, len = arguments.length; i < len; i++) {
             values.push(System.Decimal.getValue(arguments[i]));
         }
 
-        return new System.Decimal(Bridge.$Decimal.max.apply(Bridge.$Decimal, values));
+        d = Bridge.$Decimal.max.apply(Bridge.$Decimal, values);
+
+        for (var i = 0; i < arguments.length; i++) {
+            if (d.eq(values[i])) {
+                p = arguments[i].$precision;
+            }
+        }
+
+        return new System.Decimal(d, p);
     };
 
     System.Decimal.random = function (dp) {
@@ -9099,11 +9140,15 @@ Bridge.define("System.Type", {
     };
 
     System.Decimal.prototype.log = function (logBase) {
-        return new System.Decimal(this.value.log(logBase));
+        var d = new System.Decimal(this.value.log(logBase));
+        d.$precision = Math.max(d.value.decimalPlaces(), this.$precision);
+        return d;
     };
 
     System.Decimal.prototype.ln = function () {
-        return new System.Decimal(this.value.ln());
+        var d = new System.Decimal(this.value.ln());
+        d.$precision = Math.max(d.value.decimalPlaces(), this.$precision);
+        return d;
     };
 
     System.Decimal.prototype.precision = function () {
@@ -9122,7 +9167,9 @@ Bridge.define("System.Type", {
     };
 
     System.Decimal.prototype.sqrt = function () {
-        return new System.Decimal(this.value.sqrt());
+        var d = new System.Decimal(this.value.sqrt());
+        d.$precision = Math.max(d.value.decimalPlaces(), this.$precision);
+        return d;
     };
 
     System.Decimal.prototype.toDecimalPlaces = function (dp, rm) {
@@ -9138,7 +9185,9 @@ Bridge.define("System.Type", {
     };
 
     System.Decimal.prototype.pow = function (n) {
-        return new System.Decimal(this.value.pow(n));
+        var d = new System.Decimal(this.value.pow(n));
+        d.$precision = Math.max(d.value.decimalPlaces(), this.$precision);
+        return d;
     };
 
     System.Decimal.prototype.toPrecision = function (dp, rm) {
@@ -9146,7 +9195,9 @@ Bridge.define("System.Type", {
     };
 
     System.Decimal.prototype.toSignificantDigits = function (dp, rm) {
-        return new System.Decimal(this.value.toSignificantDigits(dp, rm));
+        var d = new System.Decimal(this.value.toSignificantDigits(dp, rm));
+        d.$precision = Math.max(d.value.decimalPlaces(), this.$precision);
+        return d;
     };
 
     System.Decimal.prototype.valueOf = function () {
