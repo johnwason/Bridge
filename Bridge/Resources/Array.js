@@ -1208,6 +1208,9 @@
             }
 
             return arr || result;
+        },
+        getLongLength: function (array) {
+            return System.Int64(array.length);
         }
     };
 
