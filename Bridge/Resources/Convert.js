@@ -694,6 +694,69 @@
         convertToType: function (typeCode, value, formatProvider) {
             //TODO: #822 IConvertible
             throw new System.NotSupportedException.$ctor1("IConvertible interface is not supported.");
+        },
+        changeType: function (value, conversionType, provider) {
+            if (conversionType == null) {
+                throw new System.ArgumentNullException.$ctor1("conversionType");
+            }
+            0;
+
+            if (value == null) {
+                if (Bridge.Reflection.isValueType(conversionType)) {
+                    throw new System.InvalidCastException.$ctor1("InvalidCast_CannotCastNullToValueType");
+                }
+                return null;
+            }
+
+            if (conversionType === System.Boolean) {
+                return System.Convert.toBoolean(value,provider);
+            }
+            else if (conversionType === System.Char) {
+                return System.Convert.toChar(value,provider);
+            }
+            else if (conversionType === System.SByte) {
+                return System.Convert.toSByte(value,provider);
+            }
+            else if (conversionType === System.Byte) {
+                return System.Convert.toByte(value,provider);
+            }
+            else if (conversionType === System.Int16) {
+                return System.Convert.toInt16(value,provider);
+            }
+            else if (conversionType === System.UInt16) {
+                return System.Convert.toUInt16(value,provider);
+            }
+            else if (conversionType === System.Int32) {
+                return System.Convert.toInt32(value, provider);
+            }
+            else if (conversionType === System.UInt32) {
+                return System.Convert.toUInt32(value, provider);
+            }
+            else if (conversionType === System.Int64) {
+                return System.Convert.toInt64(value, provider);
+            }
+            else if (conversionType === System.UInt64) {
+                return System.Convert.toUInt64(value, provider);
+            }
+            else if (conversionType === System.Single) {
+                return System.Convert.toSingle(value, provider);
+            }
+            else if (conversionType === System.Double) {
+                return System.Convert.toDouble(value, provider);
+            }
+            else if (conversionType === System.Decimal) {
+                return System.Convert.toDecimal(provider);
+            }
+            else if (conversionType === System.DateTime) {
+                return System.Convert.toDateTime(value, provider);
+            }
+            else if (conversionType === System.String) {
+                return System.Convert.toString(value, provider);
+            }
+            else if (conversionType === System.Object) {
+                return value;
+            }
+            throw new System.ArgumentException.$ctor1("conversionType");
         }
     };
 
@@ -1539,7 +1602,7 @@
             var fromType = scope.internal.getTypeCodeName(fromTypeCode),                toType = scope.internal.getTypeCodeName(toTypeCode);
 
             throw new System.InvalidCastException.$ctor1("Invalid cast from '" + fromType + "' to '" + toType + "'.");
-        }
+        }        
     };
 
     System.Convert = scope.convert;
