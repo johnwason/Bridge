@@ -1,6 +1,7 @@
 namespace System
 {
     [Bridge.External]
+    [Bridge.Enum(Bridge.Emit.Value)]
     public enum TypeCode
     {
         Empty = 0,

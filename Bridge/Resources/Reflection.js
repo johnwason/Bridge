@@ -1061,6 +1061,61 @@
             }
 
             return null;
+        },
+
+        getTypeCode: function(type) {
+            if (type === null) {
+                return 0;
+            }
+            else if (type === System.Boolean) {
+                return 3;
+            }
+            else if (type === System.Char) {
+                return 4;
+            }
+            else if (type === System.SByte) {
+                return 5;
+            }
+            else if (type === System.Byte) {
+                return 6;
+            }
+            else if (type === System.Int16) {
+                return 7;
+            }
+            else if (type === System.UInt16) {
+                return 8;
+            }
+            else if (type === System.Int32) {
+                return 9;
+            }
+            else if (type === System.UInt32) {
+                return 10;
+            }
+            else if (type === System.Int64) {
+                return 11;
+            }
+            else if (type === System.UInt64) {
+                return 12;
+            }
+            else if (type === System.Single) {
+                return 13;
+            }
+            else if (type === System.Double) {
+                return 14;
+            }
+            else if (type === System.Decimal) {
+                return 15;
+            }
+            else if (type === System.DateTime) {
+                return 16;
+            }
+            else if (type === System.String) {
+                return 18;
+            }
+            else {
+                return 1;
+            }
+
         }
     };
 

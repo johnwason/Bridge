@@ -1852,5 +1852,27 @@ namespace Bridge.ClientTest.Reflection
             Assert.Null(default(ImportedNamedValuesEnum), "#1");
             Assert.Null(GetDefault<ImportedNamedValuesEnum>(), "#2");
         }
+
+        [Test]
+        public void StaticGetTypeCodeWorks()
+        {
+            Assert.AreEqual(Type.GetTypeCode(null), TypeCode.Empty);
+            Assert.AreEqual(Type.GetTypeCode(typeof(bool)), TypeCode.Boolean);
+            Assert.AreEqual(Type.GetTypeCode(typeof(char)), TypeCode.Char);
+            Assert.AreEqual(Type.GetTypeCode(typeof(sbyte)), TypeCode.SByte);
+            Assert.AreEqual(Type.GetTypeCode(typeof(byte)), TypeCode.Byte);
+            Assert.AreEqual(Type.GetTypeCode(typeof(short)), TypeCode.Int16);
+            Assert.AreEqual(Type.GetTypeCode(typeof(ushort)), TypeCode.UInt16);
+            Assert.AreEqual(Type.GetTypeCode(typeof(int)), TypeCode.Int32);
+            Assert.AreEqual(Type.GetTypeCode(typeof(uint)), TypeCode.UInt32);
+            Assert.AreEqual(Type.GetTypeCode(typeof(long)), TypeCode.Int64);
+            Assert.AreEqual(Type.GetTypeCode(typeof(ulong)), TypeCode.UInt64);
+            Assert.AreEqual(Type.GetTypeCode(typeof(float)), TypeCode.Single);
+            Assert.AreEqual(Type.GetTypeCode(typeof(double)), TypeCode.Double);
+            Assert.AreEqual(Type.GetTypeCode(typeof(decimal)), TypeCode.Decimal);
+            Assert.AreEqual(Type.GetTypeCode(typeof(DateTime)), TypeCode.DateTime);
+            Assert.AreEqual(Type.GetTypeCode(typeof(string)), TypeCode.String);
+            Assert.AreEqual(Type.GetTypeCode(typeof(object)), TypeCode.Object);
+        }
     }
 }
